@@ -2,7 +2,7 @@
 
 
 ### ERD
-![스크린샷 2024-10-31 오후 1 46 00](https://github.com/user-attachments/assets/d008706d-5a8b-492a-8bcf-325664fc4d48)
+![스크린샷 2024-11-01 오후 12 19 51](https://github.com/user-attachments/assets/03767147-6c9c-40ca-ab8d-501193c09b8b)
 
 
 ### API 명세서
