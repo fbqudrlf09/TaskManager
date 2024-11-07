@@ -1,11 +1,12 @@
-package com.example.taskmanagerapplication.entity;
+package com.example.taskmanagerapplication.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
-public class Task {
+public class TaskDto {
 
     Long id;
     String taskname;
@@ -14,7 +15,7 @@ public class Task {
     Date creatDate;
     Date updateDate;
 
-    public Task(Long id, String taskname, String username, String password, Date creatDate, Date updateDate) {
+    public TaskDto(Long id, String taskname, String username, String password, Date creatDate, Date updateDate) {
         this.id = id;
         this.taskname = taskname;
         this.username = username;
