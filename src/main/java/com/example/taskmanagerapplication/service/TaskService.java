@@ -8,7 +8,7 @@ import java.util.List;
 public interface TaskService {
     List<TaskDto> findTasks(String updateAt, String username);
 
-    TaskDto addTask(TaskDto taskDto);
+    void addTask(TaskDto taskDto);
 
     TaskDto findTaskById(Long taskId);
 

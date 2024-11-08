@@ -24,3 +24,9 @@ DELETE FROM task WHERE id = 1;
 
 /* 패스워드 열 추가 */
 ALTER TABLE task ADD COLUMN password VARCHAR(20) NOT NULL AFTER user_name;
+
+/* 컬럼 데이터 타입 변경 */
+ALTER TABLE task MODIFY create_at DATETIME;
+
+/* 컬럼 데이터 타입 변경 */
+ALTER TABLE task MODIFY update_at DATETIME;

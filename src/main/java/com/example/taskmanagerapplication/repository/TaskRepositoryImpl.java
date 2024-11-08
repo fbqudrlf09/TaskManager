@@ -16,10 +16,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Repository
-public class TaskRepositoryImpl implements TaskRepository{
+public class TaskRepositoryImpl implements TaskRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -28,25 +29,25 @@ public class TaskRepositoryImpl implements TaskRepository{
     }
 
     @Override
-    public TaskDto saveTask(TaskDto task) {
+    public void saveTask(TaskDto task) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("task").usingGeneratedKeyColumns("id");
+
+        LocalDateTime now = LocalDateTime.now();
 
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("task_name", task.getTaskname());
         parameter.put("user_name", task.getUsername());
         parameter.put("password", task.getPassword());
-        parameter.put("create_at", LocalDateTime.now());
-        parameter.put("update_at", LocalDateTime.now());
+        parameter.put("create_at", now);
+        parameter.put("update_at", now);
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameter));
-
-        return task;
     }
 
     @Override
     public TaskDto findTaskById(Long id) {
-        List<TaskDto> tasks = jdbcTemplate.query("SELECT * FROM task WHERE id = ?", taskRowMapper2(), id);
+        List<TaskDto> tasks = jdbcTemplate.query("SELECT * FROM task WHERE id = ?", taskRowMapper(), id);
 
         return tasks.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -54,14 +55,15 @@ public class TaskRepositoryImpl implements TaskRepository{
 
     @Override
     public int upDateTask(Long id, TaskDto task) {
+
         return jdbcTemplate.update(
                 "UPDATE task SET task_name = ?, user_name = ?, update_at = ? WHERE id = ?;",
-                task.getTaskname(), task.getUsername(), LocalDateTime.now() ,id);
+                task.getTaskname(), task.getUsername(), LocalDateTime.now(), id);
     }
 
     @Override
     public int deleteTask(Long id) {
-         return jdbcTemplate.update("DELETE FROM task WHERE id = ?", id);
+        return jdbcTemplate.update("DELETE FROM task WHERE id = ?", id);
     }
 
     @Override
@@ -89,24 +91,8 @@ public class TaskRepositoryImpl implements TaskRepository{
                         rs.getString("task_name"),
                         rs.getString("user_name"),
                         rs.getString("password"),
-                        rs.getDate("create_at"),
-                        rs.getDate("update_at")
-                );
-            }
-        };
-    }
-
-    private RowMapper<TaskDto> taskRowMapper2() {
-        return new RowMapper<TaskDto>() {
-            @Override
-            public TaskDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new TaskDto(
-                        rs.getLong("id"),
-                        rs.getString("task_name"),
-                        rs.getString("user_name"),
-                        rs.getString("password"),
-                        rs.getDate("create_at"),
-                        rs.getDate("update_at")
+                        rs.getTimestamp("create_at"),
+                        rs.getTimestamp("update_at")
                 );
             }
         };

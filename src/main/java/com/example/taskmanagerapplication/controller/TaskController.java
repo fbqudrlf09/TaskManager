@@ -25,8 +25,8 @@ public class TaskController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public TaskDto addTask(@RequestBody TaskDto taskDto) {
-        return taskService.addTask(taskDto);
+    public void addTask(@RequestBody TaskDto taskDto) {
+        taskService.addTask(taskDto);
     }
 
     @GetMapping("/{taskId}")

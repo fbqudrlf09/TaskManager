@@ -11,10 +11,10 @@ public class Task {
     String taskname;
     String username;
     String password;
-    Date creatDate;
-    Date updateDate;
+    String creatDate;
+    String updateDate;
 
-    public Task(Long id, String taskname, String username, String password, Date creatDate, Date updateDate) {
+    public Task(Long id, String taskname, String username, String password, String creatDate, String updateDate) {
         this.id = id;
         this.taskname = taskname;
         this.username = username;

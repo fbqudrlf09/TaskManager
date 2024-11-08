@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TaskRepository {
 
-    TaskDto saveTask(TaskDto task);
+    void saveTask(TaskDto task);
 
     TaskDto findTaskById(Long id);
 
