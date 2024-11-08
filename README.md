@@ -1,7 +1,7 @@
 # 일정 관리 앱 만들기
 
 ## ERD
-![스크린샷 2024-11-08 오전 12 40 19](https://github.com/user-attachments/assets/1a8753a7-1c78-4a5f-9dc8-5e30a44ce72e)
+![스크린샷 2024-11-08 오후 12 38 41](https://github.com/user-attachments/assets/b1781be1-ae00-46fc-a34d-1a57706bd7b2)
 
 
 ## API 명세서
