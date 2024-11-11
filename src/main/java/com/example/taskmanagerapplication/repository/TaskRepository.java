@@ -1,18 +1,20 @@
 package com.example.taskmanagerapplication.repository;
 
-import com.example.taskmanagerapplication.dto.TaskDto;
+import com.example.taskmanagerapplication.entity.Task;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskRepository {
 
-    void saveTask(TaskDto task);
+    void saveTask(String taskName, String userName, String password);
 
-    TaskDto findTaskById(Long id);
+    Optional<Task> findTaskById(Long id);
 
-    int upDateTask(Long id, TaskDto task);
+    int upDateTask(Long id, String taskName, String userName, String password);
 
-    int deleteTask(Long id);
+    int deleteTask(Long id, String password);
 
-    List<TaskDto> findAllTaskFilterByUpdateAtAndUserName(String updateAt, String userName);
+    List<Task> findAllTaskFilterByUpdateAtAndUserName(String userName, LocalDateTime updateAt);
 }
